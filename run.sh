@@ -1,1 +1,1 @@
-java -Xmx2500m -Xms50m -Ddw.graphhopper.datareader.file=./france-switzerland.osm.pbf -jar target/railway_routing-1.0.0.jar server config.yml 
+java -Xmx2500m -Xms50m -Ddw.graphhopper.datareader.file=../otp-tools/fr-ch/france-switzerland.osm.pbf -jar target/railway_routing-1.0.0.jar server config.yml > logs.txt 
