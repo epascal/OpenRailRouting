@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  openrailrouting:
+    image: openrailrouting_openrailrouting:latest
+    ports:
+      - "8991:8991"
+      - "8992:8992"
+    volumes:
+      - openrailrouting-data:/data
+      - openrailrouting-cache:/graph-cache
+    environment:
+      - JAVA_OPTS=-Ddw.graphhopper.datareader.file=/data/france-switzerland.osm.pbf
+    command:
+      - java
+      - -Xmx2500m
+      - -Xms50m
+      - -Ddw.graphhopper.datareader.file=/data/france-switzerland.osm.pbf
+      - -Ddw.graphhopper.graph.location=/graph-cache
+      - -jar
+      - app.jar
+      - server
+      - config.yml
+
+volumes:
+  openrailrouting-data:
+  openrailrouting-cache:

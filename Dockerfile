@@ -45,6 +45,5 @@ RUN mkdir -p /data /graph-cache
 # Expose ports
 EXPOSE 8991 8992
 
-# Entrypoint
-# Expects OSM file path to be passed via environment variable or command line
-ENTRYPOINT ["java", "-Xmx2500m", "-Xms50m", "-Ddw.graphhopper.graph.location=/graph-cache", "-jar", "app.jar", "server", "config.yml"]
+# Default command (can be overridden by docker-compose)
+CMD ["java", "-Xmx2500m", "-Xms50m", "-Ddw.graphhopper.graph.location=/graph-cache", "-jar", "app.jar", "server", "config.yml"]
