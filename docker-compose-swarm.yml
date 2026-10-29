@@ -17,14 +17,22 @@ services:
       - -Xms50m
       - -Ddw.graphhopper.datareader.file=/data/france-switzerland.osm.pbf
       - -Ddw.graphhopper.graph.location=/graph-cache
-      # Redundant once the image is rebuilt (config-docker.yml already sets 10), but
-      # needed while the running image still bakes min_network_size=200.
-      - -Ddw.graphhopper.prepare.min_network_size=10
       - -jar
       - app.jar
       - server
       - config.yml
+    # config.yml is served from a swarm config (not the image bake) so
+    # config-docker.yml edits apply without rebuilding the image.
+    # NOTE: prepare.min_network_size cannot be set via -Ddw.* (rejected by
+    # RailwayRoutingServerConfiguration) — it must live in the config file.
+    configs:
+      - source: orr-config
+        target: /app/config.yml
 
 volumes:
   openrailrouting-data:
   openrailrouting-cache:
+
+configs:
+  orr-config:
+    file: ./config-docker.yml
