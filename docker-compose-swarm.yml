@@ -17,6 +17,9 @@ services:
       - -Xms50m
       - -Ddw.graphhopper.datareader.file=/data/france-switzerland.osm.pbf
       - -Ddw.graphhopper.graph.location=/graph-cache
+      # Redundant once the image is rebuilt (config-docker.yml already sets 10), but
+      # needed while the running image still bakes min_network_size=200.
+      - -Ddw.graphhopper.prepare.min_network_size=10
       - -jar
       - app.jar
       - server

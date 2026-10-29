@@ -15,4 +15,5 @@ services:
       java -Xmx2500m -Xms50m 
       -Ddw.graphhopper.datareader.file=/data/france-switzerland.osm.pbf 
       -Ddw.graphhopper.graph.location=/graph-cache 
+      -Ddw.graphhopper.prepare.min_network_size=10 
       -jar app.jar server config.yml
